@@ -62,9 +62,13 @@ button:hover {
     margin-bottom: 20px;
 }
 
-.video-container {
-    margin-bottom: 20px;
+.video-container video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
 }
+
 
 .controls button {
     background-color: #3498db;

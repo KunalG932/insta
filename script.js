@@ -22,7 +22,7 @@ function downloadInstagram() {
                 loadingBar.style.width = '100%';
 
                 downloadResult.innerHTML = `
-                    <video id="downloadedVideo">
+                    <video id="downloadedVideo" controls autoplay>
                         <source src="${videoUrl}" type="video/mp4">
                     </video>
                     <div class="controls">

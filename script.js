@@ -1,6 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
     const player = new Plyr('#instagramVideo');
+    applyTheme(); // Apply theme on page load
 });
+
+function applyTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.body.setAttribute('data-theme', savedTheme);
+    } else {
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.body.setAttribute('data-theme', prefersDarkMode ? 'dark' : 'light');
+    }
+}
+
+function toggleTheme() {
+    const currentTheme = document.body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+}
 
 function downloadInstagram() {
     const instagramUrl = document.getElementById('instagramUrl').value.trim();

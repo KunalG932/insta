@@ -5,14 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Instagram Video Downloader</title>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.3/plyr.css" />
-    
+    <title>Instagram Video Downloader</title>
 </head>
 
 <body>
     <div class="container">
-        <h1>Instagram Video Downloader</h1>
+        <header>
+            <h1>Instagram Video Downloader</h1>
+            <label class="switch">
+                <input type="checkbox" id="themeToggle" onclick="toggleTheme()">
+                <span class="slider round"></span>
+            </label>
+        </header>
         <div class="input-container">
             <label for="instagramUrl">Enter Instagram URL:</label>
             <input type="text" id="instagramUrl" placeholder="https://www.instagram.com/p/your-video-url/">
@@ -22,8 +27,8 @@
         <div id="downloadResult"></div>
     </div>
 
-    <script src="script.js"></script>
     <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

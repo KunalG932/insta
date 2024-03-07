@@ -1,8 +1,13 @@
 function downloadInstagram() {
-    const instagramUrl = document.getElementById('instagramUrl').value;
+    const instagramUrl = document.getElementById('instagramUrl').value.trim();
     const apiUrl = 'https://lexica.qewertyy.dev/downloaders/instagram?url=' + encodeURIComponent(instagramUrl);
     const loadingBar = document.getElementById('loadingBar');
     const downloadResult = document.getElementById('downloadResult');
+
+    if (instagramUrl === '') {
+        alert('Please enter a valid Instagram URL.');
+        return;
+    }
 
     loadingBar.style.width = '0%';
 

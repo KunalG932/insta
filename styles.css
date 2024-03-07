@@ -47,3 +47,8 @@ button:hover {
 #downloadResult {
     margin-top: 20px;
 }
+
+video {
+    width: 100%;
+    height: auto;
+}

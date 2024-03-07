@@ -18,12 +18,19 @@ function downloadInstagram() {
             if (data.code === 2) {
                 loadingBar.style.width = '100%';
                 setTimeout(() => {
-                    downloadResult.innerHTML = `
-                                                <div>
-                                                    <button onclick="playVideo()">Play</button>
-                                                    <button onclick="downloadVideo()">Download</button>
-                                                </div>
-                                                `;
+                    // Create the video element
+                    const video = document.createElement('video');
+                    video.controls = true;
+                    video.src = data.content[0].url;
+
+                    // Append the video element to downloadResult
+                    downloadResult.innerHTML = '';
+                    downloadResult.appendChild(video);
+
+                    // Attach event listeners for play and download
+                    video.addEventListener('click', () => playVideo(video));
+                    video.addEventListener('contextmenu', (event) => downloadVideo(event, video));
+
                     loadingBar.style.width = '0%';
                 }, 500);
             } else {
@@ -38,13 +45,17 @@ function downloadInstagram() {
         });
 }
 
-function playVideo() {
-    const video = document.getElementById('downloadedVideo');
-    video.play();
+function playVideo(video) {
+    if (video.paused) {
+        video.play();
+    } else {
+        video.pause();
+    }
 }
 
-function downloadVideo() {
-    const video = document.getElementById('downloadedVideo');
+function downloadVideo(event, video) {
+    event.preventDefault(); // Prevent default context menu
+
     const source = video.querySelector('source');
     const videoUrl = source.src;
 

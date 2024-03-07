@@ -25,6 +25,6 @@ function downloadInstagram() {
         .catch(error => {
             console.error('Error:', error);
             alert('An error occurred. Please try again.');
-            loadingBar.style.width = '0%'; 
+            loadingBar.style.width = '0%';
         });
 }

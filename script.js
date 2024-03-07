@@ -23,7 +23,10 @@ function downloadInstagram() {
 
                 downloadResult.innerHTML = `
     <div class="video-container">
-        <blockquote class="instagram-media" data-instgrm-permalink="${videoUrl}" data-instgrm-version="13"></blockquote>
+        <video controls>
+            <source src="${videoUrl}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
     <div class="controls">
         <button onclick="downloadVideo('${videoUrl}')">Download</button>

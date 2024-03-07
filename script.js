@@ -9,12 +9,8 @@ function downloadInstagramContent() {
       .then(data => {
         if (data.code === 2 && data.content.length > 0) {
           const content = data.content[0];
-          if (content.type === 'image') {
-            displayImage(content.url);
-            downloadLink(content.url, 'Download Image', 'instagram_image.jpg');
-          } else if (content.type === 'video') {
-            displayVideo(content.url);
-            downloadLink(content.url, 'Download Video', 'instagram_video.mp4');
+          if (content.type === 'image' || content.type === 'video') {
+            downloadFile(content.url, content.type === 'image' ? 'instagram_image.jpg' : 'instagram_video.mp4');
           } else {
             alert('Unsupported content type.');
           }
@@ -31,21 +27,11 @@ function downloadInstagramContent() {
   }
 }
 
-function displayImage(imageUrl) {
-  const resultContainer = document.getElementById('result');
-  resultContainer.innerHTML = `<img src="${imageUrl}" alt="Instagram Image">`;
-}
-
-function displayVideo(videoUrl) {
-  const resultContainer = document.getElementById('result');
-  resultContainer.innerHTML = `<video controls width="100%" src="${videoUrl}" type="video/mp4"></video>`;
-}
-
-function downloadLink(url, text, filename) {
-  const resultContainer = document.getElementById('result');
-  const downloadButton = document.createElement('a');
-  downloadButton.href = url;
-  downloadButton.download = filename;
-  downloadButton.innerText = text;
-  resultContainer.appendChild(downloadButton);
+function downloadFile(url, filename) {
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }

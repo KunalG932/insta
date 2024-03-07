@@ -1,37 +1,19 @@
-function downloadInstagramContent() {
-  const apiUrl = 'https://lexica.qewertyy.dev/downloaders/instagram?url=';
-  const instagramUrlInput = document.getElementById('instagramUrl');
-  const instagramUrl = instagramUrlInput.value.trim();
+function downloadInstagram() {
+    const instagramUrl = document.getElementById('instagramUrl').value;
+    const apiUrl = 'https://lexica.qewertyy.dev/downloaders/instagram?url=' + encodeURIComponent(instagramUrl);
 
-  if (instagramUrl) {
-    fetch(apiUrl + encodeURIComponent(instagramUrl))
-      .then(response => response.json())
-      .then(data => {
-        if (data.code === 2 && data.content.length > 0) {
-          const content = data.content[0];
-          if (content.type === 'image' || content.type === 'video') {
-            downloadFile(content.url, content.type === 'image' ? 'instagram_image.jpg' : 'instagram_video.mp4');
-          } else {
-            alert('Unsupported content type.');
-          }
-        } else {
-          alert('Failed to fetch Instagram content. Please check the URL and try again.');
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching Instagram content:', error);
-        alert('An error occurred while fetching Instagram content. Please try again later.');
-      });
-  } else {
-    alert('Please enter a valid Instagram URL.');
-  }
-}
-
-function downloadFile(url, filename) {
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+    fetch(apiUrl, { method: 'POST', headers: { 'accept': 'application/json' } })
+        .then(response => response.json())
+        .then(data => {
+            if (data.code === 2) {
+                const downloadResult = document.getElementById('downloadResult');
+                downloadResult.innerHTML = `<p>Download: <a href="${data.content[0].url}" target="_blank">Click here</a></p>`;
+            } else {
+                alert('Error downloading content. Please check the URL.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        });
 }

@@ -1,5 +1,7 @@
 function downloadInstagram() {
     const instagramUrl = document.getElementById('instagramUrl').value.trim();
+    const loadingBar = document.getElementById('loadingBar');
+    const downloadResult = document.getElementById('downloadResult');
 
     // Check if the URL is empty
     if (instagramUrl === '') {
@@ -8,12 +10,10 @@ function downloadInstagram() {
     }
 
     const apiUrl = 'https://lexica.qewertyy.dev/downloaders/instagram?url=' + encodeURIComponent(instagramUrl);
-    const loadingBar = document.getElementById('loadingBar');
-    const downloadResult = document.getElementById('downloadResult');
 
     loadingBar.style.width = '0%';
 
-    fetch(apiUrl, { method: 'POST', headers: { 'accept': 'application/json' } })
+    fetch(apiUrl, { method: 'POST', headers: { 'Accept': 'application/json' } })
         .then(response => response.json())
         .then(data => {
             if (data.code === 2 && data.content.length > 0) {
@@ -38,7 +38,7 @@ function downloadInstagram() {
         .catch(error => {
             console.error('Error:', error);
             alert('An error occurred. Please try again.');
-            loadingBar.style.width = '0%'; 
+            loadingBar.style.width = '0%';
         });
 }
 

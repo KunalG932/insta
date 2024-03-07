@@ -22,11 +22,15 @@ function downloadInstagram() {
                 loadingBar.style.width = '100%';
 
                 downloadResult.innerHTML = `
-                    <video id="downloadedVideo" controls autoplay>
-                        <source src="${videoUrl}" type="video/mp4">
-                    </video>
+                    <div class="video-container">
+                        <iframe 
+                            src="${videoUrl}" 
+                            frameborder="0" 
+                            allowfullscreen
+                            allow="autoplay; encrypted-media"
+                        ></iframe>
+                    </div>
                     <div class="controls">
-                        <button onclick="togglePlayPause()">Play/Pause</button>
                         <button onclick="downloadVideo('${videoUrl}')">Download</button>
                     </div>`;
 
@@ -41,16 +45,6 @@ function downloadInstagram() {
             alert('An error occurred. Please try again.');
             loadingBar.style.width = '0%'; 
         });
-}
-
-function togglePlayPause() {
-    const video = document.getElementById('downloadedVideo');
-
-    if (video.paused) {
-        video.play();
-    } else {
-        video.pause();
-    }
 }
 
 function downloadVideo(videoUrl) {

@@ -36,6 +36,14 @@ button:hover {
     background-color: #2980b9;
 }
 
+#loadingBar {
+    width: 0;
+    height: 5px;
+    background-color: #3498db;
+    margin-top: 10px;
+    transition: width 0.5s ease;
+}
+
 #downloadResult {
     margin-top: 20px;
 }

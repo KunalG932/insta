@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Downloader</title>
     <link rel="stylesheet" href="styles.css">
+    <title>Instagram Video Downloader</title>
 </head>
+
 <body>
+    <div class="container">
+        <h1>Instagram Video Downloader</h1>
+        <div class="input-container">
+            <label for="instagramUrl">Enter Instagram URL:</label>
+            <input type="text" id="instagramUrl" placeholder="https://www.instagram.com/p/your-video-url/">
+        </div>
+        <button onclick="downloadInstagram()">Download</button>
+        <div id="loadingBar"></div>
+        <div id="downloadResult"></div>
+    </div>
 
-<div class="container">
-    <label for="instagramUrl">Instagram URL:</label>
-    <input type="text" id="instagramUrl" placeholder="Enter Instagram URL">
-
-    <button onclick="downloadInstagram()">Download</button>
-
-    <div id="loadingBar"></div>
-
-    <div id="downloadResult"></div>
-</div>
-
-<script src="script.js"></script>
-<script async src="https://www.instagram.com/embed.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>

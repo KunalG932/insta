@@ -22,11 +22,11 @@ function downloadInstagram() {
                 loadingBar.style.width = '100%';
 
                 downloadResult.innerHTML = `
-                    <video id="downloadedVideo" controls>
+                    <video id="downloadedVideo">
                         <source src="${videoUrl}" type="video/mp4">
                     </video>
                     <div class="controls">
-                        <button onclick="playVideo()">Play</button>
+                        <button onclick="togglePlayPause()">Play/Pause</button>
                         <button onclick="downloadVideo('${videoUrl}')">Download</button>
                     </div>`;
 
@@ -43,9 +43,14 @@ function downloadInstagram() {
         });
 }
 
-function playVideo() {
+function togglePlayPause() {
     const video = document.getElementById('downloadedVideo');
-    video.play();
+
+    if (video.paused) {
+        video.play();
+    } else {
+        video.pause();
+    }
 }
 
 function downloadVideo(videoUrl) {

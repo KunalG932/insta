@@ -1,12 +1,14 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f5f5f5;
     margin: 0;
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.5s, color 0.5s;
 }
 
 .container {
@@ -19,8 +21,15 @@ body {
     width: 100%;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 h1 {
-    color: #333;
+    color: var(--header-color);
 }
 
 .input-container {
@@ -44,16 +53,17 @@ input {
 }
 
 button {
-    background-color: #4caf50;
-    color: #fff;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: var(--button-hover-bg-color);
 }
 
 #loadingBar {
@@ -69,7 +79,6 @@ button:hover {
     margin-bottom: 10px;
 }
 
-
 .controls button {
     background-color: #3498db;
     color: #fff;
@@ -82,3 +91,64 @@ button:hover {
 .controls button:hover {
     background-color: #2980b9;
 }
+
+/* Switch Styles */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+/* Night Mode Styles */
+body[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --header-color: #ffffff;
+    --button-bg-color: #4caf50;
+    --button-text-color: #ffffff;
+    --button-hover-bg-color: #45a049;
+}
+

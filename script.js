@@ -1,8 +1,5 @@
 function downloadInstagram() {
     const instagramUrl = document.getElementById('instagramUrl').value.trim();
-    const apiUrl = 'https://lexica.qewertyy.dev/downloaders/instagram?url=' + encodeURIComponent(instagramUrl);
-    const loadingBar = document.getElementById('loadingBar');
-    const downloadResult = document.getElementById('downloadResult');
 
     // Check if the URL is empty
     if (instagramUrl === '') {
@@ -10,29 +7,30 @@ function downloadInstagram() {
         return;
     }
 
+    const apiUrl = 'https://lexica.qewertyy.dev/downloaders/instagram?url=' + encodeURIComponent(instagramUrl);
+    const loadingBar = document.getElementById('loadingBar');
+    const downloadResult = document.getElementById('downloadResult');
+
     loadingBar.style.width = '0%';
 
     fetch(apiUrl, { method: 'POST', headers: { 'accept': 'application/json' } })
         .then(response => response.json())
         .then(data => {
-            if (data.code === 2) {
+            if (data.code === 2 && data.content.length > 0) {
+                const videoUrl = data.content[0].url;
+
                 loadingBar.style.width = '100%';
-                setTimeout(() => {
-                    // Create the video element
-                    const video = document.createElement('video');
-                    video.controls = true;
-                    video.src = data.content[0].url;
 
-                    // Append the video element to downloadResult
-                    downloadResult.innerHTML = '';
-                    downloadResult.appendChild(video);
+                downloadResult.innerHTML = `
+                    <video id="downloadedVideo" controls>
+                        <source src="${videoUrl}" type="video/mp4">
+                    </video>
+                    <div class="controls">
+                        <button onclick="playVideo()">Play</button>
+                        <button onclick="downloadVideo('${videoUrl}')">Download</button>
+                    </div>`;
 
-                    // Attach event listeners for play and download
-                    video.addEventListener('click', () => playVideo(video));
-                    video.addEventListener('contextmenu', (event) => downloadVideo(event, video));
-
-                    loadingBar.style.width = '0%';
-                }, 500);
+                loadingBar.style.width = '0%';
             } else {
                 alert('Error downloading content. Please check the URL.');
                 loadingBar.style.width = '0%';
@@ -45,20 +43,12 @@ function downloadInstagram() {
         });
 }
 
-function playVideo(video) {
-    if (video.paused) {
-        video.play();
-    } else {
-        video.pause();
-    }
+function playVideo() {
+    const video = document.getElementById('downloadedVideo');
+    video.play();
 }
 
-function downloadVideo(event, video) {
-    event.preventDefault(); // Prevent default context menu
-
-    const source = video.querySelector('source');
-    const videoUrl = source.src;
-
+function downloadVideo(videoUrl) {
     const link = document.createElement('a');
     link.href = videoUrl;
     link.download = 'downloaded_video.mp4';

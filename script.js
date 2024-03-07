@@ -22,17 +22,12 @@ function downloadInstagram() {
                 loadingBar.style.width = '100%';
 
                 downloadResult.innerHTML = `
-                    <div class="video-container">
-                        <iframe 
-                            src="${videoUrl}" 
-                            frameborder="0" 
-                            allowfullscreen
-                            allow="autoplay; encrypted-media"
-                        ></iframe>
-                    </div>
-                    <div class="controls">
-                        <button onclick="downloadVideo('${videoUrl}')">Download</button>
-                    </div>`;
+    <div class="video-container">
+        <blockquote class="instagram-media" data-instgrm-permalink="${videoUrl}" data-instgrm-version="13"></blockquote>
+    </div>
+    <div class="controls">
+        <button onclick="downloadVideo('${videoUrl}')">Download</button>
+    </div>`;
 
                 loadingBar.style.width = '0%';
             } else {

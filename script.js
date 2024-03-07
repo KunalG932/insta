@@ -12,10 +12,10 @@ function downloadInstagram() {
             if (data.code === 2) {
                 loadingBar.style.width = '100%';
                 setTimeout(() => {
-                    downloadResult.innerHTML = `<video controls width="100%" height="auto">
+                    downloadResult.innerHTML = `<video controls>
                                                     <source src="${data.content[0].url}" type="video/mp4">
                                                 </video>`;
-                    loadingBar.style.width = '0%'; 
+                    loadingBar.style.width = '0%';
                 }, 500);
             } else {
                 alert('Error downloading content. Please check the URL.');
@@ -25,6 +25,6 @@ function downloadInstagram() {
         .catch(error => {
             console.error('Error:', error);
             alert('An error occurred. Please try again.');
-            loadingBar.style.width = '0%';
+            loadingBar.style.width = '0%'; 
         });
 }

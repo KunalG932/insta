@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const player = new Plyr('#instagramVideo');
+});
+
 function downloadInstagram() {
     const instagramUrl = document.getElementById('instagramUrl').value.trim();
     const loadingBar = document.getElementById('loadingBar');
@@ -23,7 +27,7 @@ function downloadInstagram() {
 
                 downloadResult.innerHTML = `
     <div class="video-container">
-        <video controls>
+        <video id="instagramVideo" controls>
             <source src="${videoUrl}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -33,6 +37,9 @@ function downloadInstagram() {
     </div>`;
 
                 loadingBar.style.width = '0%';
+
+                // Re-initialize Plyr after adding the new video element
+                const player = new Plyr('#instagramVideo');
             } else {
                 alert('Error downloading content. Please check the URL.');
                 loadingBar.style.width = '0%';

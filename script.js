@@ -4,6 +4,7 @@ function downloadInstagram() {
     const loadingBar = document.getElementById('loadingBar');
     const downloadResult = document.getElementById('downloadResult');
 
+    // Check if the URL is empty
     if (instagramUrl === '') {
         alert('Please enter a valid Instagram URL.');
         return;
@@ -17,9 +18,13 @@ function downloadInstagram() {
             if (data.code === 2) {
                 loadingBar.style.width = '100%';
                 setTimeout(() => {
-                    downloadResult.innerHTML = `<video controls>
+                    downloadResult.innerHTML = `<video id="downloadedVideo" controls>
                                                     <source src="${data.content[0].url}" type="video/mp4">
-                                                </video>`;
+                                                </video>
+                                                <div>
+                                                    <button onclick="playVideo()">Play</button>
+                                                    <button onclick="downloadVideo()">Download</button>
+                                                </div>`;
                     loadingBar.style.width = '0%';
                 }, 500);
             } else {
@@ -32,4 +37,20 @@ function downloadInstagram() {
             alert('An error occurred. Please try again.');
             loadingBar.style.width = '0%'; 
         });
+}
+
+function playVideo() {
+    const video = document.getElementById('downloadedVideo');
+    video.play();
+}
+
+function downloadVideo() {
+    const video = document.getElementById('downloadedVideo');
+    const source = video.querySelector('source');
+    const videoUrl = source.src;
+
+    const link = document.createElement('a');
+    link.href = videoUrl;
+    link.download = 'downloaded_video.mp4';
+    link.click();
 }

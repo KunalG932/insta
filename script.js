@@ -18,13 +18,12 @@ function downloadInstagram() {
             if (data.code === 2) {
                 loadingBar.style.width = '100%';
                 setTimeout(() => {
-                    downloadResult.innerHTML = `<video id="downloadedVideo" controls>
-                                                    <source src="${data.content[0].url}" type="video/mp4">
-                                                </video>
+                    downloadResult.innerHTML = `
                                                 <div>
                                                     <button onclick="playVideo()">Play</button>
                                                     <button onclick="downloadVideo()">Download</button>
-                                                </div>`;
+                                                </div>
+                                                `;
                     loadingBar.style.width = '0%';
                 }, 500);
             } else {
